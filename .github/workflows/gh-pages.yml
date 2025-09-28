@@ -1,0 +1,78 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Automatically derive base path based on repository name
+      REPO_NAME: ${{ github.event.repository.name }}
+      OWNER_NAME: ${{ github.repository_owner }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Determine BASE_PATH for GitHub Pages
+        id: base
+        run: |
+          if [ "${REPO_NAME}" = "${OWNER_NAME}.github.io" ]; then
+            echo "BASE_PATH=" >> $GITHUB_OUTPUT
+          else
+            echo "BASE_PATH=/${REPO_NAME}" >> $GITHUB_OUTPUT
+          fi
+          echo "Computed BASE_PATH=${{ steps.base.outputs.BASE_PATH }}"
+
+      - name: Install dependencies (contracts)
+        working-directory: action/contracts
+        run: npm ci --legacy-peer-deps
+
+      - name: Install dependencies (frontend)
+        working-directory: action/frontend
+        run: npm ci --legacy-peer-deps
+
+      - name: Build frontend for static export
+        working-directory: action/frontend
+        env:
+          BASE_PATH: ${{ steps.base.outputs.BASE_PATH }}
+        run: |
+          npm run build
+          # Add .nojekyll to prevent GitHub Pages from ignoring files starting with _
+          touch out/.nojekyll
+          # Create a SPA-friendly 404.html that mirrors index.html
+          cp out/index.html out/404.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: action/frontend/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+

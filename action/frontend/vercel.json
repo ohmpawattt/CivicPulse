@@ -1,0 +1,16 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "env": {
+    "NEXT_PUBLIC_NETWORK_NAME": "sepolia",
+    "NEXT_PUBLIC_RPC_URL": "https://sepolia.infura.io/v3/YOUR_INFURA_KEY",
+    "NEXT_PUBLIC_CHAIN_ID": "11155111",
+    "NEXT_PUBLIC_SECRET_BALLOT_BOX_ADDRESS": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "NEXT_PUBLIC_FHEVM_ENABLED": "true",
+    "NEXT_PUBLIC_MOCK_MODE": "false"
+  }
+}
+
+

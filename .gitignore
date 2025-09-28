@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+action/contracts/node_modules/
+action/frontend/node_modules/
+
+# Next.js build outputs
+.next/
+out/
+action/frontend/.next/
+action/frontend/out/
+.vercel/
+.turbo/
+
+# Hardhat artifacts/cache
+action/contracts/artifacts/
+action/contracts/cache/
+
+# Logs and misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+*.tsbuildinfo
+
+# Env files
+.env
+.env.*
+
+# Local videos or large media not for repo
+/视频/
+
+

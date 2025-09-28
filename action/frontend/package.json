@@ -1,0 +1,55 @@
+{
+  "name": "secretballotbox-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SecretBallotBox - Privacy-preserving voting platform frontend",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "genabi": "node scripts/genabi.mjs",
+    "export": "next build",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "ethers": "^6.13.0",
+    "idb": "^8.0.3",
+    "lucide-react": "^0.400.0",
+    "next": "^15.4.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "recharts": "^2.8.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@fhevm/mock-utils": "0.1.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5",
+    "vercel": "^48.0.0",
+    "vitest": "^3.2.4"
+  },
+  "keywords": [
+    "fhevm",
+    "voting",
+    "privacy",
+    "blockchain",
+    "nextjs",
+    "react"
+  ],
+  "author": "SecretBallotBox Team",
+  "license": "MIT"
+}
